@@ -52,6 +52,32 @@ let CountOddNumbers x=
             CountOddNumbersRec x count
     CountOddNumbersRec x 0
 
+//метод #3 - Найти прозведение таких делителей числа, сумма цифр которых меньше, чем сумма цифр исходного числа.
+
+//SumNum - возвращает сумму цифр числа
+let SumNum x=
+    let rec SumNumRec x sum=
+        match x with
+        |x when x=0->sum
+        |_ -> 
+            let sum=sum+(x%10)
+            let x=x/10
+            SumNumRec x sum
+    SumNumRec x 0
+
+let MultDiv x=
+    let rec MultDivRec x mult beg=
+        match beg with
+        |beg when beg>x/2 -> mult
+        |beg when x%beg=0 && (SumNum x) > (SumNum beg) -> 
+            let mult1 = mult*beg
+            let beg1=beg+1
+            MultDivRec x mult1 beg1
+        |_ ->
+            let beg1=beg+1
+            MultDivRec x mult beg1
+    MultDivRec x 1 2
+
 [<EntryPoint>]
 let main argv =
 
@@ -66,6 +92,13 @@ let main argv =
     let x = Convert.ToInt32(Console.ReadLine())
     //метод #2
     let rescountodd = CountOddNumbers x
-    printfn $"количество нечетных цифр числа {x}, больших 3:"
+    printfn $"Количество нечетных цифр числа {x}, больших 3:"
     rescountodd |> printfn"%d"
+
+    printfn "Введите значение x:"
+    let x = Convert.ToInt32(Console.ReadLine())
+    //метод #3
+    let resmultdiv = MultDiv x
+    printfn $"Прозведение таких делителей числа {x}, сумма цифр которых меньше, чем сумма цифр исходного числа:"
+    resmultdiv |> printfn"%d"
     0
