@@ -14,7 +14,7 @@ let Euler x =
                 else init
             let newdiv = beg-1
             EulerFunc x func initmod newdiv
-    EulerFunc x (fun x y->x+1) 0 x
+    EulerFunc x (fun x y -> x+1) 0 x
 
 let SimpDividers x func init =
     let rec SimpDividersRec x func init beg = 
@@ -26,6 +26,7 @@ let SimpDividers x func init =
             let newdiv = beg-1
             SimpDividersRec x func initmod newdiv
     SimpDividersRec x func init x
+
 
 
 [<EntryPoint>]
