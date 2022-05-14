@@ -37,12 +37,35 @@ let SumDiv x=
             SumDivRec x sum beg1
     SumDivRec x 0 2
 
+//метод #2 - Найти количество нечетных цифр числа, больших 3.
+
+let CountOddNumbers x=
+    let rec CountOddNumbersRec x count=
+        match x with
+        |x when x=0 -> count
+        |x when (x%10)%2=1 && (x%10)>3 -> 
+            let count1=count+1
+            let x=x/10
+            CountOddNumbersRec x count1
+        |_ -> 
+            let x=x/10
+            CountOddNumbersRec x count
+    CountOddNumbersRec x 0
+
 [<EntryPoint>]
 let main argv =
+
     printfn "Введите значение x:"
     let x = Convert.ToInt32(Console.ReadLine())
     //метод #1
     let ressumsimple = SumDiv x
-    printfn "Сумма делителей числа x:"
+    printfn $"Сумма простых делителей числа {x}:"
     ressumsimple |> printfn"%d"
+
+    printfn "Введите значение x:"
+    let x = Convert.ToInt32(Console.ReadLine())
+    //метод #2
+    let rescountodd = CountOddNumbers x
+    printfn $"количество нечетных цифр числа {x}, больших 3:"
+    rescountodd |> printfn"%d"
     0
